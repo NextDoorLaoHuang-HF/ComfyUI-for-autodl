@@ -13,7 +13,7 @@ if __name__ == "__main__":
     if '--help' in sys.argv:
         print("Valid Command line Arguments:")
         print("\t--listen [ip]\t\t\tListen on ip or 0.0.0.0 if none given so the UI can be accessed from other computers.")
-        print("\t--port 8188\t\t\tSet the listen port.")
+        print("\t--port 6006\t\t\tSet the listen port.")
         print("\t--dont-upcast-attention\t\tDisable upcasting of attention \n\t\t\t\t\tcan boost speed but increase the chances of black images.\n")
         print("\t--use-split-cross-attention\tUse the split cross attention optimization instead of the sub-quadratic one.\n\t\t\t\t\tIgnored when xformers is used.")
         print("\t--use-pytorch-cross-attention\tUse the new pytorch 2.0 cross attention function.")
@@ -52,7 +52,7 @@ def prompt_worker(q, server):
         e.execute(item[-2], item[-1])
         q.task_done(item_id, e.outputs)
 
-async def run(server, address='', port=8188, verbose=True, call_on_start=None):
+async def run(server, address='', port=6006, verbose=True, call_on_start=None):
     await asyncio.gather(server.start(address, port, verbose, call_on_start), server.publish_loop())
 
 def hijack_progress(server):
@@ -127,7 +127,7 @@ if __name__ == "__main__":
         for i in indices:
             load_extra_path_config(sys.argv[i])
 
-    port = 8188
+    port = 6006
     try:
         p_index = sys.argv.index('--port')
         port = int(sys.argv[p_index + 1])
